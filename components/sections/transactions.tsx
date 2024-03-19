@@ -34,7 +34,6 @@ export default function Transactions({ chainData }: TransactionsProps) {
   const data = transactionsData?.map((transaction) =>
     decodeTxRaw(fromBase64(transaction))
   );
-  console.log(data);
   return (
     <div>
       <h3 className="font-bold text-zinc-900 pb-4">Transactions history</h3>

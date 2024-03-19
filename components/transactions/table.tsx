@@ -8,9 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatDecimalToPercentage } from "@/utils/format-percentage";
 import { formatPrice } from "@/utils/format-price";
 import { DecodedTxRaw } from "@cosmjs/proto-signing";
+import { handleNullValue } from "@/utils/handle-null-value";
 
 export interface TableTransactions {
   transactions?: DecodedTxRaw[];
@@ -39,7 +39,7 @@ export const TableTransactions = ({ transactions }: TableTransactions) => {
               {transaction.authInfo.fee?.amount[0]?.denom ?? "-"}
             </TableCell>
             <TableCell className="font-medium ">
-              {transaction.authInfo.fee?.granter ?? "-"}
+              {handleNullValue(transaction.authInfo.fee?.granter)}
             </TableCell>
             <TableCell>
               {formatPrice(
@@ -49,7 +49,7 @@ export const TableTransactions = ({ transactions }: TableTransactions) => {
               )}
             </TableCell>
             <TableCell className="text-right">
-              {transaction.body.memo !== "" ? transaction.body.memo : "-"}
+              {handleNullValue(transaction.body.memo)}
             </TableCell>
           </TableRow>
         ))}
