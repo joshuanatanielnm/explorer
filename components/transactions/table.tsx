@@ -31,17 +31,25 @@ export const TableTransactions = ({ transactions }: TableTransactions) => {
         {transactions?.map((transaction, index) => (
           <TableRow key={index}>
             <TableCell className="font-medium">
-              {transaction.authInfo.fee?.amount[0].amount ?? "-"}
+              {formatPrice(
+                transaction.authInfo.fee?.amount[0]?.amount ?? "-"
+              ) ?? "-"}
             </TableCell>
             <TableCell className="font-medium ">
-              {transaction.authInfo.fee?.amount[0].denom ?? "-"}
+              {transaction.authInfo.fee?.amount[0]?.denom ?? "-"}
             </TableCell>
             <TableCell className="font-medium ">
               {transaction.authInfo.fee?.granter ?? "-"}
             </TableCell>
-            <TableCell>{Number(transaction.authInfo.fee?.gasLimit)}</TableCell>
+            <TableCell>
+              {formatPrice(
+                transaction.authInfo.fee?.gasLimit
+                  ? Number(transaction.authInfo.fee?.gasLimit)
+                  : "-"
+              )}
+            </TableCell>
             <TableCell className="text-right">
-              {transaction.body.memo ?? "-"}
+              {transaction.body.memo !== "" ? transaction.body.memo : "-"}
             </TableCell>
           </TableRow>
         ))}

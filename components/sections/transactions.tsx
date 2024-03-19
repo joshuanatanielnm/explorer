@@ -1,7 +1,6 @@
 import { decodeTxRaw } from "@cosmjs/proto-signing";
-import { fromAscii, fromBase64, fromUtf8 } from "@cosmjs/encoding";
+import { fromBase64 } from "@cosmjs/encoding";
 import { ChainDetails } from "@/types/directory/chain";
-import { useBlock } from "@/hooks/useBlock";
 import { useTransactions } from "@/hooks/useTransactions";
 import { TableTransactions } from "../transactions/table";
 
@@ -39,7 +38,11 @@ export default function Transactions({ chainData }: TransactionsProps) {
   return (
     <div>
       <h3 className="font-bold text-zinc-900 pb-4">Transactions history</h3>
-      <TableTransactions transactions={data} />
+      {data && data.length > 0 ? (
+        <TableTransactions transactions={data} />
+      ) : (
+        "No transactions"
+      )}
     </div>
   );
 }

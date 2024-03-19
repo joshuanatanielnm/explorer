@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { TableValidators } from "../validators/table";
 import { ChainDetails } from "@/types/directory/chain";
 import { useQuery } from "@tanstack/react-query";
 import { getProposals } from "@/server/getProposals";
@@ -9,11 +7,11 @@ import { Proposals as ProposalsType } from "@/types/directory/proposal";
 import { TableProposals } from "../proposals/table";
 import { useState } from "react";
 
-interface ValidatorsProps {
+interface ProposalProps {
   chainData?: ChainDetails;
 }
 
-export default function Proposals({ chainData }: ValidatorsProps) {
+export default function Proposals({ chainData }: ProposalProps) {
   const [refetchInterval, setRefetchInterval] = useState(5000);
   const [retryCount, setRetryCount] = useState(0);
   const restUrl =
@@ -73,8 +71,10 @@ export default function Proposals({ chainData }: ValidatorsProps) {
   return (
     <div>
       <h3 className="font-bold text-zinc-900 pb-4">Proposal</h3>
-      {proposalData?.proposals && (
+      {proposalData?.proposals && proposalData.proposals.length > 0 ? (
         <TableProposals proposals={proposalData?.proposals} />
+      ) : (
+        " No active proposal"
       )}
     </div>
   );

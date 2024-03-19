@@ -42,7 +42,7 @@ export const TableProposals = ({ proposals }: TableProposals) => {
               {proposal.proposal_id}
             </TableCell>
             <TableCell className="font-medium">
-              {proposal.content.title}
+              {proposal.content.title ?? "-"}
             </TableCell>
             <TableCell>
               {
