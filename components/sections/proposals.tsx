@@ -5,7 +5,7 @@ import { TableValidators } from "../validators/table";
 import { ChainDetails } from "@/types/directory/chain";
 import { useQuery } from "@tanstack/react-query";
 import { getProposals } from "@/server/getProposals";
-import { Proposals } from "@/types/directory/proposal";
+import { Proposals as ProposalsType } from "@/types/directory/proposal";
 import { TableProposals } from "../proposals/table";
 import { useState } from "react";
 
@@ -35,7 +35,7 @@ export default function Proposals({ chainData }: ValidatorsProps) {
           ? `${chainData?.chain.best_apis.rest[retryCount].address}cosmos/gov/v1beta1/proposals?pagination.limit=5&pagination.count_total=true&pagination.reverse=true`
           : "";
       try {
-        const res: Proposals = await getProposals(restUrl);
+        const res: ProposalsType = await getProposals(restUrl);
         return res;
       } catch (error) {
         setRetryCount(retryCount + 1);
