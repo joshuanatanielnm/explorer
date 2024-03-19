@@ -3,12 +3,28 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ReactQueryProvider from "@/provider/react-query-provider";
+import { defaultMetadata } from "@/site.config";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Explorer",
-  description: "Explorer dashboard for Cosmos-based Blockchains.",
+  metadataBase: new URL(defaultMetadata.url),
+  title: {
+    template: `%s ⋅ ${defaultMetadata.title}`,
+    absolute: defaultMetadata.title,
+  },
+  description: defaultMetadata.description,
+  twitter: {
+    card: "summary_large_image",
+    title: defaultMetadata.title,
+    site: defaultMetadata.url,
+    description: defaultMetadata.description,
+    creator: defaultMetadata.x.username,
+  },
+  robots: {
+    follow: true,
+    index: true,
+  },
 };
 
 export default function RootLayout({
