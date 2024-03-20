@@ -54,7 +54,6 @@ export default function Block(props: Props) {
     chainData,
   });
 
-  console.log(blockHistoryData);
   useEffect(() => {
     if (blockData) {
       //@ts-ignore
@@ -92,7 +91,7 @@ export default function Block(props: Props) {
         {`Click the card to see transactions detail.`}
       </p>
       <div className="flex flex-wrap gap-6 md:px-10">
-        {blockHistoryData.length > 0 &&
+        {blockHistoryData.length > 1 ? (
           blockHistoryData
             .slice(1)
             .reverse()
@@ -146,7 +145,10 @@ export default function Block(props: Props) {
                   </DialogContent>
                 </Dialog>
               );
-            })}
+            })
+        ) : (
+          <div className="border-orange-100 h-20 w-20 animate-spin rounded-full border-8 border-t-orange-600" />
+        )}
       </div>
     </div>
   );
