@@ -1,9 +1,9 @@
 export interface BlockHeightDetail {
   jsonrpc: string;
   id: number;
-  result: Result;
+  result: BlockResult;
 }
-export interface Result {
+export interface BlockResult {
   block_id: LastBlockIdOrBlockId;
   block: Block;
 }

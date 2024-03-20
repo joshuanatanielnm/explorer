@@ -10,23 +10,26 @@ interface UseBlockInterface {
 export const useBlock = ({ chainData }: UseBlockInterface) => {
   const [refetchInterval, setRefetchInterval] = useState(5000);
   const [retryCount, setRetryCount] = useState(0);
+  const retryLimit = chainData?.chain.best_apis.rest?.length ?? 5;
   return useQuery({
     queryKey: ["USE_BLOCK", chainData?.chain.name],
     queryFn: async () => {
-      const restUrl =
-        chainData?.chain.best_apis.rest &&
-        chainData?.chain.best_apis.rest.length >= retryCount
-          ? `${chainData?.chain.best_apis.rest[retryCount].address}cosmos/base/tendermint/v1beta1/blocks/latest`
-          : "";
+      const restUrl = chainData?.chain.best_apis.rest
+        ? `${chainData?.chain.best_apis.rest[retryCount].address}cosmos/base/tendermint/v1beta1/blocks/latest`
+        : "";
+
+      console.log(restUrl, "restUrl");
       try {
+        setRefetchInterval(5000);
         const res = await getBlock(restUrl);
-        return res;
+        return { ...res, restUrl };
       } catch (error) {
         setRetryCount(retryCount + 1);
         // NOTE: RETRY TO FETCH 3 DIFFERENT REST API BEFORE STOP
-        if (retryCount === 3) {
+        if (retryCount === retryLimit) {
           setRefetchInterval(0);
         }
+        setRefetchInterval(1000);
         throw error;
       }
     },
