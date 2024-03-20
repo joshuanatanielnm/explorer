@@ -5,11 +5,10 @@ import { useState } from "react";
 
 interface UseBlockInterface {
   chainData?: ChainDetails;
-  interval: number;
 }
 
-export const useBlock = ({ chainData, interval }: UseBlockInterface) => {
-  const [refetchInterval, setRefetchInterval] = useState(interval);
+export const useBlock = ({ chainData }: UseBlockInterface) => {
+  const [refetchInterval, setRefetchInterval] = useState(5000);
   const [retryCount, setRetryCount] = useState(0);
   return useQuery({
     queryKey: ["USE_BLOCK", chainData?.chain.name],
