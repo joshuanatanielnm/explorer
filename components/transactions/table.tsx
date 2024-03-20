@@ -48,7 +48,7 @@ export const TableTransactions = ({ transactions }: TableTransactions) => {
                   : "-"
               )}
             </TableCell>
-            <TableCell className="text-right">
+            <TableCell className="text-right w-30">
               {handleNullValue(transaction.body.memo)}
             </TableCell>
           </TableRow>

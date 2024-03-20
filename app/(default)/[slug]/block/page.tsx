@@ -1,7 +1,7 @@
 "use client";
 import { useBlock } from "@/hooks/useBlock";
 import { useChainDetail } from "@/hooks/useChainDetail";
-import { Block, BlockResult } from "@/types/rpc/blockHeightDetail";
+import { BlockResult } from "@/types/rpc/blockHeightDetail";
 import { formatPrice } from "@/utils/format-price";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -15,7 +15,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Transactions from "@/components/sections/transactions";
 import { TableTransactions } from "@/components/transactions/table";
 import { decodeTxRaw } from "@cosmjs/proto-signing";
 import { fromBase64 } from "@cosmjs/encoding";
@@ -119,24 +118,26 @@ export default function Block(props: Props) {
                       </p>
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="overflow-scroll max-w-full max-h-full">
+                  <DialogContent className="lg:max-h-96 lg:w-full">
                     <DialogHeader>
                       <DialogTitle>Transactions detail</DialogTitle>
-                      <DialogDescription>
-                        {value.block.data.txs &&
-                        value.block.data.txs?.length > 0 ? (
-                          <TableTransactions transactions={txsData} />
-                        ) : (
-                          <h3>No transactions</h3>
-                        )}
-                      </DialogDescription>
                     </DialogHeader>
-                    <DialogFooter className="w-full">
+                    {value.block.data.txs &&
+                    value.block.data.txs?.length > 0 ? (
+                      <div className="overflow-scroll max-h-80 lg:max-h-52 w-full ">
+                        <div className="w-full">
+                          <TableTransactions transactions={txsData} />
+                        </div>
+                      </div>
+                    ) : (
+                      <h3 className="h-full">No transactions</h3>
+                    )}
+                    <DialogFooter className="w-full ">
                       <DialogClose asChild>
                         <Button
                           type="button"
                           variant="secondary"
-                          className="w-full"
+                          className="w-full mt-auto"
                         >
                           Close
                         </Button>
