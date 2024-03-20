@@ -9,19 +9,13 @@ interface ProposalProps {
 }
 
 export default function Proposals({ chainData }: ProposalProps) {
-  const restUrl =
-    chainData?.chain.best_apis.rest &&
-    chainData?.chain.best_apis.rest.length > 0
-      ? true
-      : false;
-
   const { data: proposalData, isLoading, isError } = useProposal({ chainData });
 
-  if (isLoading && restUrl)
+  if (isLoading)
     return (
       <div className="border-orange-100 h-20 w-20 animate-spin rounded-full border-8 border-t-orange-600" />
     );
-  if (isError || !restUrl)
+  if (isError)
     return (
       <div>
         <h3 className="font-bold text-zinc-900">Proposal</h3>
