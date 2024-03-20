@@ -5,7 +5,6 @@ import { useChainDetail } from "@/hooks/useChainDetail";
 import Validators from "@/components/sections/validators";
 import Proposals from "@/components/sections/proposals";
 import Block from "@/components/sections/block";
-import Transactions from "@/components/sections/transactions";
 
 interface Props {
   params: {
@@ -50,7 +49,6 @@ export default function Chain(props: Props) {
         </div>
         <div className="flex flex-col gap-10 md:px-9">
           <Block chainData={chainData} />
-          <Transactions chainData={chainData} />
           <Validators chainName={chainName} />
           <Proposals chainData={chainData} />
         </div>
