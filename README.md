@@ -1,4 +1,4 @@
-# Simple Explorer dashboard for Cosmos-based Blockchains.
+## Simple Explorer dashboard for Cosmos-based Blockchains.
 
 ✨ This project was made with ❤️ by [Joshua Manuputty](https://joshuanatanielm.com/)
 
@@ -23,5 +23,5 @@ Images preview
 
 <img width="1496" alt="image" src="https://github.com/joshuanatanielnm/explorer/assets/43783037/c6d938a5-430b-4fde-a9ee-e132798a8365">
 <img width="1494" alt="image" src="https://github.com/joshuanatanielnm/explorer/assets/43783037/a112213d-cf56-4149-bca9-27d5109b0c16">
-![image](https://github.com/joshuanatanielnm/explorer/assets/43783037/f07790d6-50d0-42e5-af79-0c194b4e214b)
+<img width="1495" alt="image" src="https://github.com/joshuanatanielnm/explorer/assets/43783037/b0e2566f-172e-4002-941b-a8b271406e5d">
 <img width="1512" alt="image" src="https://github.com/joshuanatanielnm/explorer/assets/43783037/d626d1c0-539e-468b-91d1-180fd11b634e">
