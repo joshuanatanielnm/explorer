@@ -25,47 +25,48 @@ export const TableValidators = ({
   showSeeMore,
 }: TableValidators) => {
   return (
-    <Table>
-      {validators && validators?.length >= 5 && showSeeMore && (
-        <TableCaption className="w-full">
-          <Link
-            href={`/${chainName}/validators`}
-            className="w-full text-zinc-800 font-semibold"
-          >
-            <div className="w-full transition delay-100 bg-orange-200 py-3 rounded-md shadow-xl sh hover:bg-orange-300">
-              See more validators
-            </div>
-          </Link>
-        </TableCaption>
-      )}
-      <TableHeader>
-        <TableRow>
-          <TableHead>Rank</TableHead>
-          <TableHead>Name</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Delegator shares</TableHead>
-          <TableHead className="text-right">Commission rates</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {validators?.map((validator) => (
-          <TableRow key={validator.address}>
-            <TableCell className="font-medium">{validator.rank}</TableCell>
-            <TableCell className="font-medium w-[400px]">
-              {validator.moniker}
-            </TableCell>
-            <TableCell>{validator.active ? "Active" : "Inactive"}</TableCell>
-            <TableCell>
-              {formatPrice(Number(validator.delegator_shares).toFixed())}
-            </TableCell>
-            <TableCell className="text-right">
-              {formatDecimalToPercentage(
-                validator.commission.commission_rates.rate
-              )}
-            </TableCell>
+    <div className="flex flex-col gap-5">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Rank</TableHead>
+            <TableHead>Name</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Delegator shares</TableHead>
+            <TableHead className="text-right">Commission rates</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {validators?.map((validator) => (
+            <TableRow key={validator.address}>
+              <TableCell className="font-medium">{validator.rank}</TableCell>
+              <TableCell className="font-medium w-[400px]">
+                {validator.moniker}
+              </TableCell>
+              <TableCell>{validator.active ? "Active" : "Inactive"}</TableCell>
+              <TableCell>
+                {formatPrice(Number(validator.delegator_shares).toFixed())}
+              </TableCell>
+              <TableCell className="text-right">
+                {formatDecimalToPercentage(
+                  validator.commission.commission_rates.rate
+                )}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+
+      {validators && validators?.length >= 5 && showSeeMore && (
+        <Link
+          href={`/${chainName}/validators`}
+          className="w-full text-zinc-800 font-semibold"
+        >
+          <div className="w-full text-sm text-center transition delay-100 bg-orange-200 py-3 rounded-md sh hover:bg-orange-300">
+            See more validators
+          </div>
+        </Link>
+      )}
+    </div>
   );
 };
