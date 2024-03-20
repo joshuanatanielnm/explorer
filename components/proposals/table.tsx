@@ -12,7 +12,7 @@ import {
 import Link from "next/link";
 import { ProposalsEntity } from "@/types/directory/proposal";
 import { proposalStatus } from "@/utils/proposal-status";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, isPast } from "date-fns";
 
 export interface TableProposals {
   proposals: ProposalsEntity[] | undefined;
@@ -48,26 +48,31 @@ export const TableProposals = ({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {proposals?.map((proposal) => (
-          <TableRow key={proposal.proposal_id}>
-            <TableCell className="font-medium">
-              {proposal.proposal_id}
-            </TableCell>
-            <TableCell className="font-medium">
-              {proposal.content.title ?? "-"}
-            </TableCell>
-            <TableCell>
-              {
-                //@ts-ignore
-                proposal.content["@type"].split(".").pop()
-              }
-            </TableCell>
-            <TableCell>{proposalStatus(proposal.status)}</TableCell>
-            <TableCell className="text-right">
-              {formatDistanceToNow(new Date(proposal.voting_end_time))}
-            </TableCell>
-          </TableRow>
-        ))}
+        {proposals?.map((proposal) => {
+          const endTime = formatDistanceToNow(
+            new Date(proposal.voting_end_time)
+          );
+          const isEndTimePast = isPast(new Date(proposal.voting_end_time));
+          const endTimeText = `${endTime}${isEndTimePast ? " ago" : ""}`;
+          return (
+            <TableRow key={proposal.proposal_id}>
+              <TableCell className="font-medium">
+                {proposal.proposal_id}
+              </TableCell>
+              <TableCell className="font-medium">
+                {proposal.content.title ?? "-"}
+              </TableCell>
+              <TableCell>
+                {
+                  //@ts-ignore
+                  proposal.content["@type"].split(".").pop()
+                }
+              </TableCell>
+              <TableCell>{proposalStatus(proposal.status)}</TableCell>
+              <TableCell className="text-right">{endTimeText}</TableCell>
+            </TableRow>
+          );
+        })}
       </TableBody>
     </Table>
   );

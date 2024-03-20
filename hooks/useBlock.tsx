@@ -18,7 +18,6 @@ export const useBlock = ({ chainData }: UseBlockInterface) => {
         ? `${chainData?.chain.best_apis.rest[retryCount].address}cosmos/base/tendermint/v1beta1/blocks/latest`
         : "";
 
-      console.log(restUrl, "restUrl");
       try {
         setRefetchInterval(5000);
         const res = await getBlock(restUrl);
