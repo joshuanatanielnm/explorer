@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { ProposalsEntity } from "@/types/directory/proposal";
 import { proposalStatus } from "@/utils/proposal-status";
+import { formatDistanceToNow } from "date-fns";
 
 export interface TableProposals {
   proposals: ProposalsEntity[] | undefined;
@@ -63,7 +64,7 @@ export const TableProposals = ({
             </TableCell>
             <TableCell>{proposalStatus(proposal.status)}</TableCell>
             <TableCell className="text-right">
-              {String(new Date(proposal.voting_end_time))}
+              {formatDistanceToNow(new Date(proposal.voting_end_time))}
             </TableCell>
           </TableRow>
         ))}
