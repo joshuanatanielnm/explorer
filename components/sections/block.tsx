@@ -20,7 +20,6 @@ export default function Block({ chainData }: BlockProps) {
     isError,
   } = useBlock({
     chainData,
-    interval: 5000, //5 second
   });
 
   if (!restUrl) return <div>Block data not available</div>;

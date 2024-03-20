@@ -50,10 +50,18 @@ export default function Validators({ chainName }: ValidatorsProps) {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="active">
-          <TableValidators validators={activeValidators} />
+          <TableValidators
+            validators={activeValidators}
+            chainName={chainName}
+            showSeeMore
+          />
         </TabsContent>
         <TabsContent value="inactive">
-          <TableValidators validators={inActiveValidators} />
+          <TableValidators
+            validators={inActiveValidators}
+            chainName={chainName}
+            showSeeMore
+          />
         </TabsContent>
       </Tabs>
     </div>

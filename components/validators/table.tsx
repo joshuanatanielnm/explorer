@@ -16,17 +16,28 @@ import { formatPrice } from "@/utils/format-price";
 
 export interface TableValidators {
   validators: ValidatorsEntity[] | undefined;
+  chainName: string;
+  showSeeMore?: boolean;
 }
-export const TableValidators = ({ validators }: TableValidators) => {
+export const TableValidators = ({
+  validators,
+  chainName,
+  showSeeMore,
+}: TableValidators) => {
   return (
     <Table>
-      <TableCaption className="w-full">
-        <Link href="/validators" className="w-full text-zinc-800 font-semibold">
-          <div className="w-full transition delay-100 bg-orange-200 py-3 rounded-md shadow-xl sh hover:bg-orange-300">
-            See more validators
-          </div>
-        </Link>
-      </TableCaption>
+      {validators && validators?.length >= 5 && showSeeMore && (
+        <TableCaption className="w-full">
+          <Link
+            href={`/${chainName}/validators`}
+            className="w-full text-zinc-800 font-semibold"
+          >
+            <div className="w-full transition delay-100 bg-orange-200 py-3 rounded-md shadow-xl sh hover:bg-orange-300">
+              See more validators
+            </div>
+          </Link>
+        </TableCaption>
+      )}
       <TableHeader>
         <TableRow>
           <TableHead>Rank</TableHead>

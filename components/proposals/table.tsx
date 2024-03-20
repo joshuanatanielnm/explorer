@@ -15,17 +15,28 @@ import { proposalStatus } from "@/utils/proposal-status";
 
 export interface TableProposals {
   proposals: ProposalsEntity[] | undefined;
+  chainName: string;
+  showSeeMore?: boolean;
 }
-export const TableProposals = ({ proposals }: TableProposals) => {
+export const TableProposals = ({
+  proposals,
+  chainName,
+  showSeeMore,
+}: TableProposals) => {
   return (
     <Table>
-      <TableCaption className="w-full">
-        <Link href="/validators" className="w-full text-zinc-800 font-semibold">
-          <div className="w-full transition delay-100 bg-orange-200 py-3 rounded-md shadow-xl sh hover:bg-orange-300">
-            See more proposals
-          </div>
-        </Link>
-      </TableCaption>
+      {proposals && proposals?.length >= 5 && showSeeMore && (
+        <TableCaption className="w-full">
+          <Link
+            href={`/${chainName}/proposals`}
+            className="w-full text-zinc-800 font-semibold"
+          >
+            <div className="w-full transition delay-100 bg-orange-200 py-3 rounded-md shadow-xl sh hover:bg-orange-300">
+              See more proposals
+            </div>
+          </Link>
+        </TableCaption>
+      )}
       <TableHeader>
         <TableRow>
           <TableHead>ID</TableHead>
