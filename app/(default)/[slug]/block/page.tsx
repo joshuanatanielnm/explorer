@@ -117,19 +117,19 @@ export default function Block(props: Props) {
                       </p>
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="lg:max-h-96 lg:w-full">
+                  <DialogContent className="max-w-6xl">
                     <DialogHeader>
                       <DialogTitle>Transactions detail</DialogTitle>
                     </DialogHeader>
                     {value.block.data.txs &&
                     value.block.data.txs?.length > 0 ? (
-                      <div className="overflow-scroll max-h-80 lg:max-h-52 w-full ">
+                      <div className="overflow-scroll max-h-[82vh] lg:max-h-[90vh] w-full ">
                         <div className="w-full">
                           <TableTransactions transactions={txsData} />
                         </div>
                       </div>
                     ) : (
-                      <h3 className="h-full">No transactions</h3>
+                      <h3 className="h-[82vh] ">No transactions</h3>
                     )}
                     <DialogFooter className="w-full ">
                       <DialogClose asChild>
