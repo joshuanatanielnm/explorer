@@ -36,7 +36,7 @@ export default function Home({ chainsData }: HomeProps) {
         value={search}
         onChange={handleChange}
       />
-      <div className="flex flex-wrap gap-8 pt-10">
+      <div className="flex flex-wrap gap-4 md:gap-6 pt-10">
         {chains.map((chain) => (
           <ChainCard
             chainName={chain.name}
