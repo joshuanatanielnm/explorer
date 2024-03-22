@@ -10,6 +10,8 @@ interface UseProposalInterface {
 
 export const useProposal = ({ chainData }: UseProposalInterface) => {
   const [retryCount, setRetryCount] = useState(0);
+  const [refetchInterval, setRefetchInterval] = useState(5000);
+  const retryLimit = chainData?.chain.best_apis.rest?.length ?? 5;
   return useQuery({
     queryKey: ["USE_CHAIN_PROPOSAL", chainData?.chain.name],
     queryFn: async () => {
@@ -19,12 +21,18 @@ export const useProposal = ({ chainData }: UseProposalInterface) => {
           ? `${chainData?.chain.best_apis.rest[retryCount].address}cosmos/gov/v1beta1/proposals?pagination.count_total=true&pagination.reverse=true`
           : "";
       try {
+        setRefetchInterval(5000);
         const res: ProposalsType = await getProposals(restUrl);
         return res;
       } catch (error) {
+        // NOTE: RETRY TO FETCH 3 DIFFERENT REST API BEFORE STOP
+        if (retryCount === retryLimit) {
+          setRefetchInterval(0);
+        }
         setRetryCount(retryCount + 1);
         throw error;
       }
     },
+    refetchInterval: refetchInterval,
   });
 };
