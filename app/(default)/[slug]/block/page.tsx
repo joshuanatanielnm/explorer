@@ -123,13 +123,13 @@ export default function Block(props: Props) {
                     </DialogHeader>
                     {value.block.data.txs &&
                     value.block.data.txs?.length > 0 ? (
-                      <div className="overflow-scroll max-h-[82vh] lg:max-h-[90vh] w-full ">
+                      <div className="overflow-scroll max-h-[70vh] lg:max-h-[90vh] w-full ">
                         <div className="w-full">
                           <TableTransactions transactions={txsData} />
                         </div>
                       </div>
                     ) : (
-                      <h3 className="h-[82vh] ">No transactions</h3>
+                      <h3 className="h-[60vh] ">No transactions</h3>
                     )}
                     <DialogFooter className="w-full ">
                       <DialogClose asChild>
