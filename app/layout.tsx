@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ReactQueryProvider from "@/provider/react-query-provider";
 import { defaultMetadata } from "@/site.config";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,6 +35,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head />
+      <Analytics />
       <body className="bg-orange-50">
         <div className="h-3 w-full bg-gradient-to-b from-orange-500 to-yellow-50" />
         <ReactQueryProvider>
